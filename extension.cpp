@@ -1382,7 +1382,7 @@ static cell_t Native_json_load_file_ex(IPluginContext *pContext, const cell_t *p
 	return hndlResult;
 }
 
-//native json_dump(Handle:hObject, String:sJSON[], maxlength, iIndentWidth = 4, bool:bEnsureAscii = false, bool:bSortKeys = false, bool:bPreserveOrder = false);
+//native json_dump(Handle:hObject, String:sJSON[], maxlength, iIndentWidth = 4, bool:bEnsureAscii = false, bool:bSortKeys = false, bool:bPreserveOrder = false, bool:bCompact = false);
 static cell_t Native_json_dump(IPluginContext *pContext, const cell_t *params) {
 	HandleError err;
 	HandleSecurity sec;
@@ -1410,6 +1410,10 @@ static cell_t Native_json_dump(IPluginContext *pContext, const cell_t *params) {
 		flags = flags | JSON_PRESERVE_ORDER;
 	}
 
+	if(params[8] == 1) {						// Param 8: bCompact
+		flags = flags | JSON_COMPACT;
+	}
+
 	// Return
 	char *result = json_dumps(object, flags);
 	if(result != NULL) {
@@ -1420,7 +1424,7 @@ static cell_t Native_json_dump(IPluginContext *pContext, const cell_t *params) {
 	return -1;
 }
 
-//native bool:json_dump_file(Handle:hObject, const String:sFilePath[], iIndentWidth = 4, bool:bEnsureAscii = false, bool:bSortKeys = false, bool:bPreserveOrder = false);
+//native bool:json_dump_file(Handle:hObject, const String:sFilePath[], iIndentWidth = 4, bool:bEnsureAscii = false, bool:bSortKeys = false, bool:bPreserveOrder = false, bool:bCompact = false);
 static cell_t Native_json_dump_file(IPluginContext *pContext, const cell_t *params) {
 	HandleError err;
 	HandleSecurity sec;
@@ -1454,6 +1458,10 @@ static cell_t Native_json_dump_file(IPluginContext *pContext, const cell_t *para
 
 	if(params[6] == 1) {						// Param 6: bPreserveOrder
 		flags = flags | JSON_PRESERVE_ORDER;
+	}
+
+	if(params[7] == 1) {						// Param 7: bCompact
+		flags = flags | JSON_COMPACT;
 	}
 
 	// Return

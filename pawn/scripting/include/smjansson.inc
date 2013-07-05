@@ -802,9 +802,14 @@ native Handle:json_load_file_ex(const String:sFilePath[PLATFORM_MAX_PATH], Strin
  *                          into the same order in which they were first inserted to
  *                          the object. For example, decoding a JSON text and then
  *                          encoding with this flag preserves the order of object keys.
+ * @param bCompact          This flag enables a compact representation, i.e. sets the
+ *                          separator between array and object items to "," and between
+ *                          object keys and values to ":". Without this flag, the
+ *                          corresponding separators are ", " and ": " for more readable
+ *                          output.
  * @return                  Length of the returned string or -1 on error.
  */
-native json_dump(Handle:hObject, String:sJSON[], maxlength, iIndentWidth = 4, bool:bEnsureAscii = false, bool:bSortKeys = false, bool:bPreserveOrder = false);
+native json_dump(Handle:hObject, String:sJSON[], maxlength, iIndentWidth = 4, bool:bEnsureAscii = false, bool:bSortKeys = false, bool:bPreserveOrder = false, bool:bCompact = false);
 
 /**
  * Write the JSON representation of hObject to the file sFilePath.
@@ -826,9 +831,14 @@ native json_dump(Handle:hObject, String:sJSON[], maxlength, iIndentWidth = 4, bo
  *                          into the same order in which they were first inserted to
  *                          the object. For example, decoding a JSON text and then
  *                          encoding with this flag preserves the order of object keys.
+ * @param bCompact          This flag enables a compact representation, i.e. sets the
+ *                          separator between array and object items to "," and between
+ *                          object keys and values to ":". Without this flag, the
+ *                          corresponding separators are ", " and ": " for more readable
+ *                          output.
  * @return                  Length of the returned string or -1 on error.
  */
-native bool:json_dump_file(Handle:hObject, const String:sFilePath[], iIndentWidth = 4, bool:bEnsureAscii = false, bool:bSortKeys = false, bool:bPreserveOrder = false);
+native bool:json_dump_file(Handle:hObject, const String:sFilePath[], iIndentWidth = 4, bool:bEnsureAscii = false, bool:bSortKeys = false, bool:bPreserveOrder = false, bool:bCompact = false);
 
 
 
